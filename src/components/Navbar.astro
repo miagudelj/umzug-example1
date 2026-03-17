@@ -1,0 +1,223 @@
+---
+const links = [
+  { label: 'Why Us', href: '#why' },
+  { label: 'Services', href: '#services' },
+  { label: 'Process', href: '#process' },
+  { label: 'Reviews', href: '#reviews' },
+];
+---
+
+<nav id="nav">
+  <div class="wrap">
+    <a href="#" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L5 9h4v6h6V9h4L12 2z"/>
+          <rect x="4" y="17" width="16" height="5" rx="1.5"/>
+        </svg>
+      </div>
+      DRIFT&CO.
+    </a>
+    <ul class="nav-menu">
+      {links.map(link => (
+        <li><a href={link.href}>{link.label}</a></li>
+      ))}
+    </ul>
+    <a href="#quote" class="nav-btn">Offerte anfragen</a>
+    <button class="burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mob-nav" id="mobNav">
+  {links.map(link => (
+    <a href={link.href} class="mob-link">{link.label}</a>
+  ))}
+  <a href="#quote" class="mob-link mob-link--accent">Offerte anfragen</a>
+</div>
+
+<style>
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 300;
+    padding: 24px 0;
+    transition: all 0.5s var(--ease);
+  }
+
+  nav.scrolled {
+    padding: 16px 0;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px) saturate(1.2);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+  }
+
+  /* On hero: white text. When scrolled: dark text */
+  nav .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
+    transition: color 0.4s;
+  }
+
+  nav.scrolled .logo { color: var(--text); }
+
+  .logo-mark {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: var(--accent-1);
+    display: grid;
+    place-items: center;
+    transition: transform 0.4s var(--ease-bounce);
+  }
+
+  .logo:hover .logo-mark { transform: rotate(-12deg) scale(1.1); }
+  .logo-mark svg { width: 22px; height: 22px; }
+
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-menu a {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.75);
+    transition: color 0.3s;
+    position: relative;
+    padding: 4px 0;
+  }
+
+  nav.scrolled .nav-menu a { color: var(--text-2); }
+
+  .nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-1);
+    border-radius: 2px;
+    transition: width 0.4s var(--ease);
+  }
+
+  .nav-menu a:hover { color: #fff; }
+  nav.scrolled .nav-menu a:hover { color: var(--text); }
+  .nav-menu a:hover::after { width: 100%; }
+
+  .nav-btn {
+    padding: 12px 28px;
+    border-radius: 100px;
+    background: var(--accent-1);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.88rem;
+    font-family: 'Inter', sans-serif;
+    border: none;
+    cursor: pointer !important;
+    position: relative;
+    z-index: 10;
+    transition: all 0.3s var(--ease);
+  }
+
+  .nav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px var(--accent-glow);
+    background: var(--accent-2);
+  }
+
+  .burger {
+    display: none;
+    flex-direction: column;
+    gap: 7px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    z-index: 301;
+  }
+
+  .burger span {
+    display: block;
+    width: 30px;
+    height: 2px;
+    background: #fff;
+    border-radius: 10px;
+    transition: all 0.4s var(--ease);
+    transform-origin: center;
+  }
+
+  nav.scrolled .burger span { background: var(--text); }
+
+  .burger.open span { background: #fff !important; }
+  .burger.open span:nth-child(1) { transform: rotate(45deg) translate(6px, 6.5px); }
+  .burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6.5px); }
+
+  .mob-nav {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-dark);
+    z-index: 200;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s var(--ease);
+  }
+
+  .mob-nav.open { opacity: 1; pointer-events: all; }
+
+  .mob-link {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.6);
+    transition: color 0.3s, transform 0.5s var(--ease);
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  .mob-nav.open .mob-link {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .mob-link:hover { color: #fff; }
+  .mob-link--accent { color: var(--accent-2) !important; }
+
+  .mob-link:nth-child(1) { transition-delay: 0.05s; }
+  .mob-link:nth-child(2) { transition-delay: 0.1s; }
+  .mob-link:nth-child(3) { transition-delay: 0.15s; }
+  .mob-link:nth-child(4) { transition-delay: 0.2s; }
+  .mob-link:nth-child(5) { transition-delay: 0.25s; }
+
+  @media (max-width: 768px) {
+    .nav-menu, .nav-btn { display: none; }
+    .burger { display: flex; }
+    .mob-nav { display: flex; }
+  }
+</style>

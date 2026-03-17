@@ -1,0 +1,174 @@
+---
+const services = [
+  {
+    idx: '01',
+    title: 'Residential Moving',
+    desc: 'Full-service home relocations with dedicated crews, museum-grade packing, and door-to-door coordination. We treat every item like it\'s irreplaceable — because to you, it is.',
+    tag: 'Most Popular',
+    icon: '<path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/><path d="M10 9h4"/>',
+    image: 'https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=600&q=80',
+    imageAlt: 'Bright living room with moving boxes',
+  },
+  {
+    idx: '02',
+    title: 'Corporate Relocation',
+    desc: 'Zero-downtime office transitions. IT infrastructure, furniture systems, and sensitive documents — moved on your schedule, usually overnight or over a weekend.',
+    tag: 'Enterprise',
+    icon: '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 8h3M7 11h10"/>',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80',
+    imageAlt: 'Modern office interior workspace',
+  },
+  {
+    idx: '03',
+    title: 'Specialty & Fine Art',
+    desc: 'Climate-controlled transport, bespoke crating, and art-handler certified specialists. Grand pianos, gallery collections, vintage automobiles — we\'ve moved them all.',
+    tag: 'White Glove',
+    icon: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="12" r="4"/><path d="M3 9h2M19 9h2M3 15h2M19 15h2"/>',
+    image: 'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=600&q=80',
+    imageAlt: 'Grand piano in elegant room',
+  },
+  {
+    idx: '04',
+    title: 'Long Distance & Cross-Country',
+    desc: 'Real-time GPS tracking, guaranteed delivery windows, dedicated move coordinators, and a single point of contact from coast to coast. No hand-offs, no confusion.',
+    tag: 'Nationwide',
+    icon: '<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/>',
+    image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&q=80',
+    imageAlt: 'Truck driving on scenic highway',
+  },
+];
+---
+
+<section id="services">
+  <div class="wrap">
+    <div class="rv">
+      <div class="label">Services</div>
+      <h2 class="sec-title">Every Move Has<br>a <span class="serif italic">Blueprint</span></h2>
+      <p class="sec-desc">Tailored solutions for every scale — from a one-bedroom walk-up to a 200-person office floor.</p>
+    </div>
+    <div class="services-grid">
+      {services.map((srv, i) => (
+        <div class={`srv-card rv rv-d${i + 1}`}>
+          <div class="srv-img">
+            <img src={srv.image} alt={srv.imageAlt} loading="lazy" />
+          </div>
+          <div class="srv-body">
+            <div class="srv-icon">
+              <svg viewBox="0 0 24 24" set:html={srv.icon} />
+            </div>
+            <h3>{srv.title}</h3>
+            <p>{srv.desc}</p>
+            <span class="srv-tag">{srv.tag}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 64px;
+  }
+
+  .srv-card {
+    border-radius: var(--r);
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    overflow: hidden;
+    transition: all 0.5s var(--ease);
+  }
+
+  .srv-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+  }
+
+  .srv-img {
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .srv-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .srv-card:hover .srv-img img {
+    transform: scale(1.06);
+  }
+
+  .srv-body {
+    padding: 32px 28px;
+  }
+
+  .srv-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: var(--accent-subtle);
+    display: grid;
+    place-items: center;
+    margin-bottom: 20px;
+    transition: all 0.4s var(--ease);
+  }
+
+  .srv-card:hover .srv-icon {
+    background: var(--accent-1);
+    transform: rotate(-6deg) scale(1.05);
+  }
+
+  .srv-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--accent-1);
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.4s;
+  }
+
+  .srv-card:hover .srv-icon svg { stroke: #fff; }
+
+  .srv-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .srv-card p {
+    color: var(--text-2);
+    font-size: 0.92rem;
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+
+  .srv-tag {
+    display: inline-flex;
+    padding: 6px 16px;
+    border-radius: 100px;
+    background: var(--bg-surface);
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--accent-1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+  }
+
+  .srv-card:hover .srv-tag {
+    background: var(--accent-subtle);
+  }
+
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: 1fr; }
+  }
+</style>

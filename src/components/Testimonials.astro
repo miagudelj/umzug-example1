@@ -1,0 +1,184 @@
+---
+const star = '<svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>';
+const stars = Array(5).fill(star).join('');
+
+const testimonials = {
+  left: [
+    {
+      featured: true,
+      quote: 'Portland to Miami — 3,300 miles with a 4-bedroom home, two kids, a dog, and a vintage record collection I\'d die for. Not a single scratch. Our coordinator Elena called us every evening with updates. I\'ve never experienced this level of care from any service company. We\'ve sent five families their way since.',
+      name: 'Sarah Rodriguez',
+      role: 'Cross-country move · Portland → Miami',
+      initials: 'SR',
+      avatarClass: 'av-warm',
+    },
+    {
+      featured: false,
+      quote: 'They moved my grandmother\'s 1920s Steinway. Custom crate, climate vehicle, white gloves — literally. Not a nick. Worth every cent.',
+      name: 'Diana Morales',
+      role: 'Specialty · Steinway grand piano',
+      initials: 'DM',
+      avatarClass: 'av-mint',
+    },
+  ],
+  right: [
+    {
+      featured: false,
+      quote: 'Relocated our 60-person office over a single weekend. Monday morning — every desk, every monitor, every cable — exactly where it needed to be. Our IT team was speechless.',
+      name: 'James Kwon',
+      role: 'COO · Vertex Labs',
+      initials: 'JK',
+      avatarClass: 'av-cool',
+    },
+    {
+      featured: false,
+      quote: 'Fourth move with Drift. I literally just text my coordinator now and everything happens. It\'s the easiest part of relocating — which is wild to say out loud.',
+      name: 'Alex Park',
+      role: 'Repeat client · 4 moves & counting',
+      initials: 'AP',
+      avatarClass: 'av-rose',
+    },
+  ],
+};
+---
+
+<section id="reviews">
+  <div class="wrap">
+    <div class="rv">
+      <div class="label">Reviews</div>
+      <h2 class="sec-title">What Our Clients<br>Are <span class="serif italic">Saying</span></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-col">
+        {testimonials.left.map((t, i) => (
+          <div class={`testi${t.featured ? ' featured' : ''} rv rv-d${i + 1}`}>
+            <div class="testi-stars" set:html={stars} />
+            <blockquote>"{t.quote}"</blockquote>
+            <div class="testi-author">
+              <div class={`testi-av ${t.avatarClass}`}>{t.initials}</div>
+              <div>
+                <div class="testi-name">{t.name}</div>
+                <div class="testi-role">{t.role}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="testi-col">
+        {testimonials.right.map((t, i) => (
+          <div class={`testi rv rv-d${i + 2}`}>
+            <div class="testi-stars" set:html={stars} />
+            <blockquote>"{t.quote}"</blockquote>
+            <div class="testi-author">
+              <div class={`testi-av ${t.avatarClass}`}>{t.initials}</div>
+              <div>
+                <div class="testi-name">{t.name}</div>
+                <div class="testi-role">{t.role}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testi-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 24px;
+    margin-top: 64px;
+  }
+
+  .testi-col {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .testi {
+    padding: 36px 32px;
+    border-radius: var(--r);
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    transition: all 0.4s var(--ease);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .testi::before {
+    content: '\201C';
+    font-family: 'Playfair Display', serif;
+    font-size: 7rem;
+    position: absolute;
+    top: -15px;
+    right: 16px;
+    line-height: 1;
+    color: var(--accent-1);
+    opacity: 0.06;
+    pointer-events: none;
+  }
+
+  .testi:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  }
+
+  .testi-stars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 18px;
+  }
+
+  .testi-stars :global(svg) {
+    width: 16px;
+    height: 16px;
+    fill: #f59e0b;
+  }
+
+  .testi blockquote {
+    font-size: 0.98rem;
+    line-height: 1.8;
+    color: var(--text-2);
+    font-style: normal;
+    margin-bottom: 24px;
+  }
+
+  .testi.featured blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .testi-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .testi-av {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 0.82rem;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .av-warm { background: var(--accent-1); }
+  .av-cool { background: #6366f1; }
+  .av-mint { background: #10b981; }
+  .av-rose { background: #ec4899; }
+
+  .testi-name { font-weight: 700; font-size: 0.92rem; }
+  .testi-role { font-size: 0.8rem; color: var(--text-3); margin-top: 2px; }
+
+  @media (max-width: 1024px) {
+    .testi-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,635 @@
+---
+const trustItems = [
+  { label: 'Fully Licensed & Insured', icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>' },
+  { label: 'Free Cancellation', icon: '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>' },
+  { label: 'No Hidden Fees — Ever', icon: '<rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/>' },
+];
+---
+
+<section class="cta" id="quote">
+  <div class="wrap">
+    <div class="cta-box rv">
+      <div class="cta-bg">
+        <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=1200&q=80" alt="" loading="lazy" />
+        <div class="cta-overlay"></div>
+      </div>
+      <div class="cta-inner">
+        <div class="label label--light" style="justify-content:center;">Let's Go</div>
+        <h2 class="sec-title" style="color:#fff;">Ready to Move<br>Without the <span class="serif italic">Chaos?</span></h2>
+        <p class="sec-desc" style="color:rgba(255,255,255,0.75);margin:0 auto 40px;">Free, no-obligation estimate in under 2 hours. Tell us where you're headed — we'll orchestrate the rest.</p>
+        <div class="cta-btns">
+          <a href="tel:+18005559274" class="btn btn-fill-white">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            (800) 555-MOVE
+          </a>
+          <a href="mailto:hello@driftco.com" class="btn btn-ghost-white">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            hello@driftco.com
+          </a>
+          <button class="btn btn-ghost-white" id="openFormBtn" type="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+            Kontaktformular
+          </button>
+        </div>
+        <div class="cta-trust">
+          {trustItems.map(item => (
+            <span class="cta-trust-item">
+              <svg viewBox="0 0 24 24" set:html={item.icon} />
+              {item.label}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Form Overlay -->
+<div class="form-overlay" id="formOverlay">
+  <div class="form-backdrop" id="formBackdrop"></div>
+  <div class="form-modal">
+    <button class="form-close" id="formClose" type="button" aria-label="Schliessen">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <div class="form-header">
+      <h3>Offerte anfragen</h3>
+      <p>Füllen Sie das Formular aus und wir melden uns innert 2 Stunden bei Ihnen.</p>
+    </div>
+    <form id="contactForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">Vorname *</label>
+          <input type="text" id="firstName" name="firstName" required placeholder="Max" />
+        </div>
+        <div class="form-group">
+          <label for="lastName">Nachname *</label>
+          <input type="text" id="lastName" name="lastName" required placeholder="Muster" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">E-Mail *</label>
+          <input type="email" id="email" name="email" required placeholder="max@beispiel.ch" />
+        </div>
+        <div class="form-group">
+          <label for="phone">Telefon *</label>
+          <input type="tel" id="phone" name="phone" required placeholder="+41 79 123 45 67" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="moveFrom">Von (Adresse / PLZ) *</label>
+          <input type="text" id="moveFrom" name="moveFrom" required placeholder="Zürich, 8001" />
+        </div>
+        <div class="form-group">
+          <label for="moveTo">Nach (Adresse / PLZ) *</label>
+          <input type="text" id="moveTo" name="moveTo" required placeholder="Bern, 3001" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="message">Nachricht *</label>
+        <textarea id="message" name="message" rows="4" required placeholder="Details zum Umzug, besondere Wünsche, Zeitraum..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-fill form-submit" id="submitBtn">
+        Offerte anfragen
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+        </svg>
+      </button>
+    </form>
+    <div class="form-success" id="formSuccess">
+      <!-- Background checkmark -->
+      <div class="success-check">
+        <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="var(--accent-1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+      </div>
+      <!-- Truck animation scene -->
+      <div class="truck-scene">
+        <div class="road">
+          <div class="road-line"></div>
+        </div>
+        <div class="truck" id="truck">
+          <svg viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="truck-svg">
+            <rect x="0" y="8" width="65" height="35" rx="4" fill="var(--accent-1)"/>
+            <rect x="4" y="12" width="57" height="27" rx="2" fill="var(--accent-2)" opacity="0.3"/>
+            <path d="M65 18 L65 43 L95 43 L95 28 L80 18 Z" fill="var(--accent-1)"/>
+            <path d="M68 22 L78 22 L88 30 L88 36 L68 36 Z" fill="#d4e7ff" opacity="0.7"/>
+            <rect x="93" y="35" width="8" height="8" rx="2" fill="#888"/>
+            <circle cx="22" cy="48" r="10" fill="#333"/>
+            <g class="wheel" style="transform-origin:22px 48px;">
+              <circle cx="22" cy="48" r="5" fill="#555"/>
+              <line x1="22" y1="40" x2="22" y2="56" stroke="#777" stroke-width="1.5"/>
+              <line x1="14" y1="48" x2="30" y2="48" stroke="#777" stroke-width="1.5"/>
+            </g>
+            <circle cx="80" cy="48" r="10" fill="#333"/>
+            <g class="wheel" style="transform-origin:80px 48px;">
+              <circle cx="80" cy="48" r="5" fill="#555"/>
+              <line x1="80" y1="40" x2="80" y2="56" stroke="#777" stroke-width="1.5"/>
+              <line x1="72" y1="48" x2="88" y2="48" stroke="#777" stroke-width="1.5"/>
+            </g>
+          </svg>
+        </div>
+        <!-- Packages: independent, fixed in scene -->
+        <div class="package pkg-1">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="6" width="20" height="16" rx="2" fill="var(--accent-2)"/>
+            <path d="M2 10h20" stroke="var(--accent-1)" stroke-width="1.5"/>
+            <path d="M12 6v16" stroke="var(--accent-1)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="package pkg-2">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="6" width="20" height="16" rx="2" fill="var(--accent-2)"/>
+            <path d="M2 10h20" stroke="var(--accent-1)" stroke-width="1.5"/>
+            <path d="M12 6v16" stroke="var(--accent-1)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="package pkg-3">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="6" width="20" height="16" rx="2" fill="var(--accent-2)"/>
+            <path d="M2 10h20" stroke="var(--accent-1)" stroke-width="1.5"/>
+            <path d="M12 6v16" stroke="var(--accent-1)" stroke-width="1.5"/>
+          </svg>
+        </div>
+      </div>
+      <h3>Vielen Dank!</h3>
+      <p>Ihre Anfrage wurde erfolgreich übermittelt. Wir melden uns innert 2 Stunden bei Ihnen.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* CTA Section */
+  .cta-box {
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cta-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .cta-bg img { width: 100%; height: 100%; object-fit: cover; }
+
+  .cta-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.88), rgba(26, 26, 46, 0.75));
+  }
+
+  .cta-inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: clamp(48px, 8vw, 100px) clamp(24px, 5vw, 60px);
+  }
+
+  .label--light { color: var(--accent-2); }
+  .label--light::before { background: var(--accent-2); }
+
+  .cta-btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .cta-trust {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .cta-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+  }
+
+  .cta-trust-item :global(svg) {
+    width: 18px; height: 18px;
+    stroke: var(--accent-2);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  #openFormBtn { cursor: pointer; }
+
+  /* ====== OVERLAY ====== */
+  .form-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s var(--ease), visibility 0.4s;
+  }
+
+  .form-overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .form-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 26, 46, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .form-modal {
+    position: relative;
+    background: var(--bg-elevated);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 620px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 48px 40px;
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.2);
+    transform: translateY(30px) scale(0.97);
+    transition: transform 0.4s var(--ease);
+  }
+
+  .form-overlay.open .form-modal {
+    transform: translateY(0) scale(1);
+  }
+
+  .form-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: all 0.3s var(--ease);
+    color: var(--text-2);
+  }
+
+  .form-close:hover {
+    background: var(--accent-subtle);
+    border-color: var(--accent-1);
+    color: var(--accent-1);
+  }
+
+  .form-header {
+    margin-bottom: 32px;
+  }
+
+  .form-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  .form-header p {
+    color: var(--text-2);
+    font-size: 0.95rem;
+  }
+
+  /* Form fields */
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-2);
+  }
+
+  .form-group input,
+  .form-group textarea {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-2);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    transition: all 0.3s var(--ease);
+    outline: none;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: var(--text-3);
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--accent-1);
+    background: var(--bg-elevated);
+    box-shadow: 0 0 0 3px var(--accent-subtle);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .form-submit {
+    width: 100%;
+    justify-content: center;
+    margin-top: 8px;
+  }
+
+  /* Success */
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 20px 0 40px;
+  }
+
+  .form-success.show { display: block; }
+
+  .form-success h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--text);
+    margin-bottom: 8px;
+    animation: fadeUp 0.6s 1s var(--ease) both;
+  }
+
+  .form-success p {
+    color: var(--text-2);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    animation: fadeUp 0.6s 1.2s var(--ease) both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ====== SUCCESS CHECK (background) ====== */
+  .success-check {
+    opacity: 0;
+    animation: checkFade 1.5s 0.3s var(--ease) forwards;
+    margin-bottom: -40px;
+    position: relative;
+    z-index: 0;
+  }
+
+  .success-check svg {
+    opacity: 0.12;
+  }
+
+  @keyframes checkFade {
+    0% { opacity: 0; transform: scale(0.5); }
+    60% { opacity: 1; transform: scale(1.05); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  /* ====== TRUCK SCENE ====== */
+  .truck-scene {
+    position: relative;
+    height: 140px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .road {
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--border-2);
+    border-radius: 3px;
+  }
+
+  .road-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--text-3) 0px,
+      var(--text-3) 12px,
+      transparent 12px,
+      transparent 24px
+    );
+    opacity: 0.4;
+    animation: roadScroll 0.8s linear infinite;
+  }
+
+  @keyframes roadScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-24px); }
+  }
+
+  .truck {
+    position: absolute;
+    bottom: 18px;
+    left: -140px;
+    width: 120px;
+    height: 60px;
+    animation: truckDrive 4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+  }
+
+  .truck-svg {
+    width: 120px;
+    height: 60px;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+  }
+
+  .truck-svg :global(.wheel) {
+    animation: wheelSpin 0.5s linear infinite;
+  }
+
+  @keyframes wheelSpin {
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes truckDrive {
+    0% { left: -140px; }
+    100% { left: calc(100% + 20px); }
+  }
+
+  /* Packages — positioned independently in scene */
+  .package {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    bottom: 60px;
+    opacity: 0;
+  }
+
+  .package svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+  }
+
+  .pkg-1 {
+    left: 20%;
+    animation: pkgFall1 1s 0.6s forwards;
+  }
+
+  .pkg-2 {
+    left: 40%;
+    width: 22px;
+    height: 22px;
+    animation: pkgFall2 1s 1.2s forwards;
+  }
+
+  .pkg-3 {
+    left: 58%;
+    width: 25px;
+    height: 25px;
+    animation: pkgFall3 1s 1.8s forwards;
+  }
+
+  @keyframes pkgFall1 {
+    0%   { opacity: 1; bottom: 60px; transform: rotate(0deg); }
+    20%  { opacity: 1; bottom: 80px; transform: rotate(-15deg); }
+    50%  { opacity: 1; bottom: 18px; transform: rotate(-30deg); }
+    65%  { opacity: 1; bottom: 35px; transform: rotate(-22deg); }
+    80%  { opacity: 1; bottom: 18px; transform: rotate(-28deg); }
+    90%  { opacity: 1; bottom: 24px; transform: rotate(-25deg); }
+    100% { opacity: 1; bottom: 18px; transform: rotate(-26deg); }
+  }
+
+  @keyframes pkgFall2 {
+    0%   { opacity: 1; bottom: 60px; transform: rotate(0deg); }
+    20%  { opacity: 1; bottom: 85px; transform: rotate(20deg); }
+    50%  { opacity: 1; bottom: 18px; transform: rotate(40deg); }
+    65%  { opacity: 1; bottom: 30px; transform: rotate(32deg); }
+    80%  { opacity: 1; bottom: 18px; transform: rotate(37deg); }
+    90%  { opacity: 1; bottom: 22px; transform: rotate(35deg); }
+    100% { opacity: 1; bottom: 18px; transform: rotate(36deg); }
+  }
+
+  @keyframes pkgFall3 {
+    0%   { opacity: 1; bottom: 60px; transform: rotate(0deg); }
+    20%  { opacity: 1; bottom: 78px; transform: rotate(-10deg); }
+    50%  { opacity: 1; bottom: 18px; transform: rotate(-35deg); }
+    65%  { opacity: 1; bottom: 32px; transform: rotate(-25deg); }
+    80%  { opacity: 1; bottom: 18px; transform: rotate(-32deg); }
+    90%  { opacity: 1; bottom: 23px; transform: rotate(-30deg); }
+    100% { opacity: 1; bottom: 18px; transform: rotate(-31deg); }
+  }
+
+  @media (max-width: 768px) {
+    .cta-trust { flex-direction: column; gap: 14px; }
+
+    .form-modal { padding: 32px 24px; }
+    .form-row { grid-template-columns: 1fr; }
+
+    .truck-scene { height: 110px; }
+
+    .truck {
+      width: 80px;
+      height: 40px;
+    }
+
+    .truck-svg {
+      width: 80px;
+      height: 40px;
+    }
+
+    .truck { bottom: 14px; }
+
+    .package { width: 20px !important; height: 20px !important; bottom: 45px; }
+
+    .pkg-1 { left: 15%; }
+    .pkg-2 { left: 38%; }
+    .pkg-3 { left: 55%; }
+  }
+</style>
+
+<script>
+  const overlay = document.getElementById('formOverlay')!;
+  const openBtn = document.getElementById('openFormBtn')!;
+  const closeBtn = document.getElementById('formClose')!;
+  const backdrop = document.getElementById('formBackdrop')!;
+
+  function openForm() {
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeForm() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  openBtn.addEventListener('click', openForm);
+  closeBtn.addEventListener('click', closeForm);
+  backdrop.addEventListener('click', closeForm);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeForm();
+  });
+
+  document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const btn = document.getElementById('submitBtn') as HTMLButtonElement;
+    const success = document.getElementById('formSuccess')!;
+
+    btn.disabled = true;
+    btn.textContent = 'Wird gesendet...';
+
+    setTimeout(() => {
+      form.style.display = 'none';
+      document.querySelector('.form-header')!.setAttribute('style', 'display:none');
+      success.classList.add('show');
+    }, 1500);
+  });
+</script>

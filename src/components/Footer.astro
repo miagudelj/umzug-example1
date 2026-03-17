@@ -1,0 +1,182 @@
+---
+const columns = [
+  {
+    title: 'Services',
+    links: [
+      { label: 'Residential', href: '#services' },
+      { label: 'Corporate', href: '#services' },
+      { label: 'Specialty', href: '#services' },
+      { label: 'Long Distance', href: '#services' },
+    ],
+  },
+  {
+    title: 'Contact',
+    links: [
+      { label: 'Offerte anfragen', href: '#quote' },
+      { label: 'hello@driftco.com', href: 'mailto:hello@driftco.com' },
+      { label: '(800) 555-MOVE', href: 'tel:+18005559274' },
+    ],
+  },
+];
+---
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a href="#" class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 2L5 9h4v6h6V9h4L12 2z"/>
+              <rect x="4" y="17" width="16" height="5" rx="1.5"/>
+            </svg>
+          </div>
+          DRIFT&CO.
+        </a>
+        <p>Premium moving and relocation for people who expect more. Trusted by 14,000+ families and businesses across 42 states since 2016.</p>
+      </div>
+      {columns.map(col => (
+        <div class="foot-col">
+          <h4>{col.title}</h4>
+          <ul>
+            {col.links.map(link => (
+              <li><a href={link.href}>{link.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Drift&Co. Moving. All rights reserved.</span>
+      <div class="foot-socials">
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+        </a>
+        <a href="#" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="#" aria-label="X">
+          <svg viewBox="0 0 24 24"><path d="M4 4l6.5 8L4 20h2l5.5-6.8L16 20h4l-6.8-8.5L20 4h-2l-5.2 6.4L8 4H4z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    background: var(--bg-surface);
+    color: var(--text);
+    padding: 72px 0 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .foot-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+
+  .foot-brand p {
+    color: var(--text-2);
+    font-size: 0.92rem;
+    margin-top: 18px;
+    max-width: 300px;
+    line-height: 1.8;
+  }
+
+  .foot-col h4 {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-3);
+    margin-bottom: 20px;
+  }
+
+  .foot-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .foot-col a {
+    color: var(--text-2);
+    font-size: 0.92rem;
+    transition: color 0.3s;
+  }
+
+  .foot-col a:hover { color: var(--accent-2); }
+
+  .foot-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    font-size: 0.82rem;
+    color: var(--text-3);
+  }
+
+  .foot-socials { display: flex; gap: 12px; }
+
+  .foot-socials a {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: grid;
+    place-items: center;
+    transition: all 0.3s var(--ease);
+  }
+
+  .foot-socials a:hover {
+    border-color: var(--accent-1);
+    background: var(--accent-subtle);
+    transform: translateY(-3px);
+  }
+
+  .foot-socials :global(svg) {
+    width: 18px;
+    height: 18px;
+    fill: var(--text-3);
+    transition: fill 0.3s;
+  }
+
+  .foot-socials a:hover :global(svg) { fill: var(--accent-1); }
+
+  .logo {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text);
+  }
+
+  .logo-mark {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: var(--accent-1);
+    display: grid;
+    place-items: center;
+    transition: transform 0.4s var(--ease-bounce);
+  }
+
+  .logo:hover .logo-mark { transform: rotate(-12deg) scale(1.1); }
+  .logo-mark :global(svg) { width: 22px; height: 22px; }
+
+  @media (max-width: 1024px) {
+    .foot-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+  }
+
+  @media (max-width: 768px) {
+    .foot-top { grid-template-columns: 1fr; gap: 32px; }
+    .foot-bottom { flex-direction: column; gap: 20px; text-align: center; }
+  }
+</style>

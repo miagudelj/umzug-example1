@@ -1,0 +1,127 @@
+---
+const steps = [
+  { num: '01', title: 'Share Your Details', desc: 'Tell us the origin, destination, and scope. Get a transparent, binding quote — no surprises.' },
+  { num: '02', title: 'Custom Strategy', desc: 'Your coordinator maps out timing, crew size, equipment, and logistics down to the hour.' },
+  { num: '03', title: 'Precision Execution', desc: 'Our trained crews arrive on time, fully equipped. Every item wrapped, loaded, and secured with care.' },
+  { num: '04', title: 'Welcome Home', desc: 'Unpack, place, arrange. Walk through with your coordinator and sign off. You\'re home.' },
+];
+---
+
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="process-head rv">
+      <div class="label" style="justify-content:center;">Process</div>
+      <h2 class="sec-title">Four Steps to<br><span class="serif italic">Effortless</span></h2>
+      <p class="sec-desc">From first call to final placement — every move follows our battle-tested playbook.</p>
+    </div>
+    <div class="steps" id="stepsContainer">
+      {steps.map((step, i) => (
+        <div class={`step rv${i > 0 ? ` rv-d${i}` : ''}`}>
+          <div class="step-num">{step.num}</div>
+          <h3>{step.title}</h3>
+          <p>{step.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .process {
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .process-head {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 80px;
+  }
+
+  .process-head .sec-desc { margin: 0 auto; }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+  }
+
+  .steps::before {
+    content: '';
+    position: absolute;
+    top: 44px;
+    left: 12%;
+    right: 12%;
+    height: 2px;
+    background: var(--border);
+  }
+
+  .steps::after {
+    content: '';
+    position: absolute;
+    top: 44px;
+    left: 12%;
+    height: 2px;
+    width: 0;
+    background: var(--accent-1);
+    transition: width 1.5s var(--ease);
+  }
+
+  .steps.animated::after { width: 76%; }
+
+  .step {
+    text-align: center;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-num {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: var(--bg-elevated);
+    border: 2px solid var(--border);
+    display: grid;
+    place-items: center;
+    margin: 0 auto 28px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--text-3);
+    transition: all 0.5s var(--ease);
+  }
+
+  .step:hover .step-num {
+    background: var(--accent-1);
+    border-color: var(--accent-1);
+    color: #fff;
+    transform: scale(1.12);
+    box-shadow: 0 8px 30px var(--accent-glow);
+  }
+
+  .step h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+  }
+
+  .step p {
+    color: var(--text-2);
+    font-size: 0.88rem;
+    line-height: 1.7;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1024px) {
+    .steps { grid-template-columns: repeat(2, 1fr); gap: 48px; }
+    .steps::before, .steps::after { display: none; }
+  }
+
+  @media (max-width: 768px) {
+    .steps { grid-template-columns: 1fr; gap: 40px; }
+  }
+</style>

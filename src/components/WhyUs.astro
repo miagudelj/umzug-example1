@@ -1,0 +1,102 @@
+---
+const stats = [
+  { target: '14', suffix: 'K+', decimals: 0, label: 'Moves Completed', sub: 'Across 42 states since 2016' },
+  { target: '99.7', suffix: '%', decimals: 1, label: 'Damage-Free Delivery', sub: 'Industry-leading precision' },
+  { target: '4.9', suffix: '★', decimals: 1, label: 'Client Rating', sub: '3,200+ verified reviews' },
+  { target: '2', suffix: 'hr', decimals: 0, label: 'Avg. Quote Time', sub: 'Most under 45 minutes' },
+];
+---
+
+<section id="why">
+  <div class="wrap">
+    <div class="rv">
+      <div class="label">Why Drift</div>
+      <h2 class="sec-title">Numbers That<br>Move <span class="serif italic">Confidence</span></h2>
+      <p class="sec-desc">We've earned our reputation one flawless move at a time. Here's the proof.</p>
+    </div>
+    <div class="why-grid">
+      {stats.map((stat, i) => (
+        <div class={`why-card rv rv-d${i + 1}`}>
+          <div
+            class="why-num"
+            data-target={stat.target}
+            data-suffix={stat.suffix}
+            data-decimals={String(stat.decimals)}
+          >
+            0
+          </div>
+          <div class="why-label">{stat.label}</div>
+          <div class="why-sub">{stat.sub}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 60px;
+  }
+
+  .why-card {
+    background: var(--bg-elevated);
+    padding: 40px 28px;
+    border-radius: var(--r);
+    border: 1px solid var(--border);
+    position: relative;
+    transition: all 0.4s var(--ease);
+    cursor: auto;
+  }
+
+  .why-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  }
+
+  .why-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent-1);
+    border-radius: 0 0 var(--r) var(--r);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--ease);
+  }
+
+  .why-card:hover::after { transform: scaleX(1); }
+
+  .why-num {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 4vw, 3.4rem);
+    font-weight: 900;
+    color: var(--accent-1);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .why-label {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+
+  .why-sub {
+    font-size: 0.82rem;
+    color: var(--text-3);
+  }
+
+  @media (max-width: 1024px) {
+    .why-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    .why-grid { grid-template-columns: 1fr; }
+  }
+</style>
